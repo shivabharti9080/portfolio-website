@@ -1,0 +1,236 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum SkillStatus {
+  LEARNING
+  PRACTICING
+  PROFICIENT
+}
+
+enum ProjectStatus {
+  CONCEPT
+  IN_PROGRESS
+  COMPLETED
+  PUBLISHED
+}
+
+enum TimelineType {
+  EDUCATION
+  LEARNING_MILESTONE
+  PROJECT
+  INTERNSHIP
+  CERTIFICATION
+  OTHER
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         Role      @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Profile {
+  id                   String   @id @default(cuid())
+  fullName             String   @default("Shiva Bharti")
+  headline             String   @default("Full-Stack Developer | Web Developer | App Developer | Automation Developer | Aspiring AI Engineer")
+  bio                  String   @db.Text
+  email                String   @default("shivaharti9080@gmail.com")
+  phone                String   @default("+91 6284172388")
+  location             String   @default("India")
+  githubUsername       String   @default("shivabharti9080")
+  githubUrl            String   @default("https://github.com/shivabharti9080")
+  linkedinUrl          String?  
+  twitterUrl           String?  
+  avatarUrl            String   @default("/images/profile.jpg")
+  availableForWork     Boolean  @default(true)
+  availabilityStatus   String   @default("Available for collaborations and opportunities")
+  aboutApproach        String   @db.Text
+  whatIBuild           String   @db.Text
+  whatIAmLearning      String   @db.Text
+  whatIWantToBuildNext String   @db.Text
+  updatedAt            DateTime @updatedAt
+}
+
+model SkillCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  order       Int      @default(0)
+  skills      Skill[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id          String        @id @default(cuid())
+  name        String
+  categoryId  String
+  category    SkillCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  status      SkillStatus   @default(LEARNING)
+  ratingScore Int?          // Optional numerical proficiency score (1-100) only if explicitly configured
+  order       Int           @default(0)
+  isFeatured  Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([categoryId])
+}
+
+model LearningMilestone {
+  id          String       @id @default(cuid())
+  title       String
+  description String       @db.Text
+  category    String?
+  milestoneDate DateTime
+  isVerified  Boolean      @default(true)
+  order       Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Project {
+  id                 String               @id @default(cuid())
+  title              String
+  slug               String               @unique
+  summary            String               @db.Text
+  category           String               // Full-Stack Development, Mobile Applications, Automation, etc.
+  status             ProjectStatus        @default(CONCEPT)
+  isFeatured         Boolean              @default(false)
+  isPublished        Boolean              @default(true)
+  thumbnailUrl       String?
+  githubUrl          String?
+  demoUrl            String?
+  problemStatement   String?              @db.Text
+  proposedSolution   String?              @db.Text
+  systemArchitecture String?              @db.Text
+  challengesLearned  String?              @db.Text
+  futureRoadmap      String?              @db.Text
+  targetAudience     String?              @db.Text
+  order              Int                  @default(0)
+  technologies       ProjectTechnology[]
+  images             ProjectImage[]
+  features           ProjectFeature[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+
+  @@index([slug])
+  @@index([category])
+}
+
+model ProjectTechnology {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  category  String?  // Frontend, Backend, Database, AI, etc.
+
+  @@index([projectId])
+}
+
+model ProjectImage {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String
+  caption   String?
+  order     Int      @default(0)
+
+  @@index([projectId])
+}
+
+model ProjectFeature {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  description String?  @db.Text
+  isCompleted Boolean  @default(false) // Distinguish completed vs planned modules
+  order       Int      @default(0)
+
+  @@index([projectId])
+}
+
+model Service {
+  id           String   @id @default(cuid())
+  title        String
+  description  String   @db.Text
+  deliverables String   @db.Text // newline or JSON separated
+  technologies String   @db.Text // comma or JSON separated
+  iconName     String?  @default("Code")
+  isEnabled    Boolean  @default(true)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Experience {
+  id          String       @id @default(cuid())
+  type        TimelineType @default(LEARNING_MILESTONE)
+  title       String
+  organization String?     // School, Institution, or Self-directed project
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  isCurrent   Boolean      @default(false)
+  description String       @db.Text
+  skillsUsed  String?      // comma-separated
+  order       Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Certification {
+  id             String    @id @default(cuid())
+  title          String
+  issuer         String
+  issueDate      DateTime
+  expirationDate DateTime?
+  credentialUrl  String?
+  credentialId   String?
+  order          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  ipAddress String?
+  isRead    Boolean  @default(false)
+  isArchived Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model ResumeAsset {
+  id         String   @id @default(cuid())
+  filename   String
+  filePath   String
+  fileSize   Int
+  mimeType   String   @default("application/pdf")
+  isCurrent  Boolean  @default(true)
+  uploadedAt DateTime @default(now())
+}
