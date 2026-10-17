@@ -17,7 +17,6 @@ import {
   getLearningMilestonesData,
 } from "@/services/portfolioService";
 
-
 export default async function HomePage() {
   const [profile, skillCategories, projects, services, timeline, milestones] =
     await Promise.all([
@@ -30,14 +29,14 @@ export default async function HomePage() {
     ]);
 
   return (
-    <main className="min-h-screen bg-[#080808] text-white selection:bg-[#F4B400]/30 selection:text-[#FFF4D6]">
-      {/* Floating Glass Navigation */}
+    <main className="min-h-screen bg-white text-[#64748B] selection:bg-[#1E3A5F] selection:text-white">
+      {/* Clean White Navigation */}
       <Navbar githubUrl={profile.githubUrl} />
 
-      {/* Hero Section */}
+      {/* Hero Section with Charcoal headings & Navy highlights */}
       <Hero profile={profile as any} />
 
-      {/* About Section */}
+      {/* About Section with generous whitespace */}
       <About profile={profile as any} />
 
       {/* Skills Dashboard with Interactive Graphs */}
@@ -58,7 +57,7 @@ export default async function HomePage() {
       {/* Contact Section with Functional Form */}
       <ContactSection profile={profile as any} />
 
-      {/* Footer */}
+      {/* Minimal Footer */}
       <Footer profile={profile as any} />
     </main>
   );

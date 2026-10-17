@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Shiva Bharti | Full-Stack Developer & Aspiring AI Engineer",
@@ -63,8 +71,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className="antialiased bg-[#080808] text-white min-h-screen selection:bg-[#F4B400]/30 selection:text-[#FFF4D6]">
+    <html lang="en" className={`${plusJakartaSans.variable} scroll-smooth`}>
+      <body className="antialiased bg-white text-[#64748B] min-h-screen selection:bg-[#1E3A5F] selection:text-white font-sans">
         {children}
       </body>
     </html>

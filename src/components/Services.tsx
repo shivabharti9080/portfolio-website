@@ -45,18 +45,18 @@ export const Services: React.FC<ServicesProps> = ({ services }) => {
     <section
       id="services"
       aria-label="Areas of Focus and Development Services"
-      className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative"
+      className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative bg-[#F5F7FA]/60 rounded-3xl my-8 border border-[#E2E8F0]"
     >
       {/* Section Header */}
       <div className="flex flex-col items-start mb-14">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-white/10 text-xs font-mono text-[#F4B400] mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF4FA] border border-[#CBD5E1]/70 text-xs font-semibold text-[#1E3A5F] mb-3">
           <Code className="w-3.5 h-3.5" />
           <span>05 / CAPABILITIES & FOCUS</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#242424] tracking-tight">
           Development Services & Areas of Focus.
         </h2>
-        <p className="mt-4 text-[#A1A1AA] text-base sm:text-lg max-w-2xl leading-relaxed">
+        <p className="mt-3.5 text-[#64748B] text-base sm:text-lg max-w-2xl leading-relaxed">
           Presented honestly as core engineering specializations and practical capabilities rather than claimed agency client history.
         </p>
       </div>
@@ -72,32 +72,30 @@ export const Services: React.FC<ServicesProps> = ({ services }) => {
           return (
             <div
               key={service.id}
-              className="glass-panel p-7 rounded-3xl border-white/10 hover:border-[#F4B400]/40 transition-all flex flex-col justify-between group relative overflow-hidden"
+              className="premium-card p-7 rounded-3xl flex flex-col justify-between group"
             >
-              <div className="absolute top-0 right-0 w-28 h-28 bg-[#F4B400]/5 rounded-bl-full pointer-events-none group-hover:bg-[#F4B400]/10 transition-colors" />
-
               <div>
                 {/* Icon Box */}
-                <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/15 flex items-center justify-center text-[#F4B400] mb-5 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-[#EEF4FA] border border-[#CBD5E1]/60 flex items-center justify-center text-[#1E3A5F] mb-5 group-hover:scale-105 transition-transform shadow-xs">
                   <Icon className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#FFF4D6] transition-colors">
+                <h3 className="text-lg font-bold text-[#242424] mb-2 group-hover:text-[#1E3A5F] transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed mb-5">
+                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed mb-5">
                   {service.description}
                 </p>
 
                 {/* Deliverables */}
-                <div className="space-y-2 mb-6 pt-4 border-t border-white/10">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                <div className="space-y-2 mb-6 pt-4 border-t border-[#E2E8F0]">
+                  <span className="text-[11px] font-semibold text-[#94A3B8] uppercase tracking-wider block mb-1">
                     Potential Deliverables:
                   </span>
                   {deliverablesList.map((del, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2 text-xs text-zinc-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#34C759] mt-0.5 flex-shrink-0" />
+                    <div key={dIdx} className="flex items-start gap-2 text-xs text-[#475569]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] mt-0.5 flex-shrink-0" />
                       <span>{del}</span>
                     </div>
                   ))}
@@ -107,15 +105,15 @@ export const Services: React.FC<ServicesProps> = ({ services }) => {
               {/* Technologies & CTA */}
               <div>
                 <div className="mb-4">
-                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                  <span className="text-[11px] font-semibold text-[#94A3B8] uppercase tracking-wider block mb-1">
                     Tech Stack:
                   </span>
-                  <p className="text-xs font-mono text-[#F4B400]">{service.technologies}</p>
+                  <p className="text-xs font-semibold text-[#1E3A5F]">{service.technologies}</p>
                 </div>
 
                 <a
                   href="#contact"
-                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold bg-white/[0.04] border border-white/10 hover:bg-[#F4B400] hover:text-black hover:border-transparent text-white transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#1E3A5F] hover:text-white hover:border-[#1E3A5F] text-[#1E3A5F] transition-all"
                 >
                   <span>Inquire for Collaboration</span>
                   <ArrowRight className="w-3.5 h-3.5" />

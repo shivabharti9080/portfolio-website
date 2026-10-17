@@ -12,11 +12,7 @@ import {
   LogOut,
   Plus,
   Trash2,
-  Edit,
   ExternalLink,
-  CheckCircle2,
-  Clock,
-  Sparkles,
   Save,
   Upload,
 } from "lucide-react";
@@ -202,28 +198,27 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
   const unreadMessagesCount = messages.filter((m) => !m.isRead).length;
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#242424] flex flex-col md:flex-row">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 glass-panel border-r border-white/10 p-6 flex flex-col justify-between flex-shrink-0">
+      <aside className="w-full md:w-64 bg-white border-r border-[#E2E8F0] p-6 flex flex-col justify-between flex-shrink-0">
         <div className="space-y-6">
-          <div className="flex items-center gap-3 pb-6 border-b border-white/10">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 flex items-center justify-center font-bold text-lg text-white">
-              <span className="text-white">S</span>
-              <span className="text-[#F4B400]">B</span>
+          <div className="flex items-center gap-3 pb-6 border-b border-[#E2E8F0]">
+            <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] text-white flex items-center justify-center font-bold text-base shadow-xs">
+              <span>SB</span>
             </div>
             <div>
-              <h2 className="text-sm font-bold text-white">Admin Console</h2>
-              <span className="text-[10px] font-mono text-zinc-400">Shiva Bharti Portfolio</span>
+              <h2 className="text-sm font-bold text-[#242424]">Admin Console</h2>
+              <span className="text-[11px] text-[#64748B]">Shiva Bharti Portfolio</span>
             </div>
           </div>
 
-          <nav className="space-y-1.5">
+          <nav className="space-y-1">
             <button
               onClick={() => setActiveTab("overview")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "overview"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -232,40 +227,40 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
 
             <button
               onClick={() => setActiveTab("projects")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "projects"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <div className="flex items-center gap-3">
                 <FolderGit2 className="w-4 h-4" />
                 <span>Projects</span>
               </div>
-              <span className="text-xs font-mono opacity-80">{projects.length}</span>
+              <span className="text-xs font-bold opacity-80">{projects.length}</span>
             </button>
 
             <button
               onClick={() => setActiveTab("skills")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "skills"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <div className="flex items-center gap-3">
                 <Cpu className="w-4 h-4" />
                 <span>Skills Dashboard</span>
               </div>
-              <span className="text-xs font-mono opacity-80">{skills.reduce((acc, c) => acc + c.skills.length, 0)}</span>
+              <span className="text-xs font-bold opacity-80">{skills.reduce((acc, c) => acc + c.skills.length, 0)}</span>
             </button>
 
             <button
               onClick={() => setActiveTab("profile")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "profile"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <User className="w-4 h-4" />
@@ -274,10 +269,10 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
 
             <button
               onClick={() => setActiveTab("inbox")}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "inbox"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -285,7 +280,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
                 <span>Contact Inbox</span>
               </div>
               {unreadMessagesCount > 0 && (
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FF4D4F] text-white">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#EF4444] text-white">
                   {unreadMessagesCount}
                 </span>
               )}
@@ -293,10 +288,10 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
 
             <button
               onClick={() => setActiveTab("resume")}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors ${
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors ${
                 activeTab === "resume"
-                  ? "bg-[#F4B400] text-black font-semibold"
-                  : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-[#1E3A5F] text-white shadow-xs"
+                  : "text-[#64748B] hover:text-[#242424] hover:bg-[#F1F5F9]"
               }`}
             >
               <FileText className="w-4 h-4" />
@@ -305,12 +300,12 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
           </nav>
         </div>
 
-        <div className="pt-6 border-t border-white/10 space-y-2">
+        <div className="pt-6 border-t border-[#E2E8F0] space-y-2">
           <a
             href="/"
             target="_blank"
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-mono text-zinc-300 bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] transition-colors"
+            rel="noreferrer"
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-[#1E3A5F] bg-[#EEF4FA] border border-[#CBD5E1]/60 hover:bg-[#E2E8F0] transition-colors"
           >
             <span>View Public Site</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -318,7 +313,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
 
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-mono text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-[#EF4444] bg-[#FEF2F2] border border-[#FECACA] hover:bg-[#FEE2E2] transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign Out</span>
@@ -329,9 +324,9 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
       {/* Main Content Area */}
       <main className="flex-1 p-6 sm:p-10 overflow-y-auto">
         {statusMsg && (
-          <div className="p-3.5 mb-6 rounded-2xl bg-[#34C759]/15 border border-[#34C759]/30 text-xs sm:text-sm text-emerald-300 flex items-center justify-between">
+          <div className="p-3.5 mb-6 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] text-xs sm:text-sm text-[#065F46] flex items-center justify-between">
             <span>{statusMsg}</span>
-            <button onClick={() => setStatusMsg(null)} className="text-zinc-400 hover:text-white">✕</button>
+            <button onClick={() => setStatusMsg(null)} className="text-[#059669] hover:text-[#047857]">✕</button>
           </div>
         )}
 
@@ -339,59 +334,59 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
         {activeTab === "overview" && (
           <div className="space-y-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">System Overview</h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">Live status of your portfolio records</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">System Overview</h1>
+              <p className="text-xs text-[#64748B] mt-1">Live status of your portfolio records</p>
             </div>
 
             {/* Metric KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="glass-panel p-5 rounded-2xl border-white/10">
-                <span className="text-[11px] font-mono text-zinc-400">Total Projects</span>
-                <p className="text-3xl font-bold text-white mt-1">{projects.length}</p>
-                <span className="text-[10px] font-mono text-[#F4B400] mt-2 block">
+              <div className="premium-card p-5 rounded-2xl">
+                <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">Total Projects</span>
+                <p className="text-3xl font-bold text-[#242424] mt-1">{projects.length}</p>
+                <span className="text-[11px] font-semibold text-[#1E3A5F] mt-2 block">
                   {projects.filter((p) => p.isPublished).length} Published
                 </span>
               </div>
 
-              <div className="glass-panel p-5 rounded-2xl border-white/10">
-                <span className="text-[11px] font-mono text-zinc-400">Total Skills</span>
-                <p className="text-3xl font-bold text-white mt-1">
+              <div className="premium-card p-5 rounded-2xl">
+                <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">Total Skills</span>
+                <p className="text-3xl font-bold text-[#242424] mt-1">
                   {skills.reduce((acc, c) => acc + c.skills.length, 0)}
                 </p>
-                <span className="text-[10px] font-mono text-[#34C759] mt-2 block">
+                <span className="text-[11px] font-semibold text-[#059669] mt-2 block">
                   Across {skills.length} Categories
                 </span>
               </div>
 
-              <div className="glass-panel p-5 rounded-2xl border-white/10">
-                <span className="text-[11px] font-mono text-zinc-400">Unread Inquiries</span>
-                <p className="text-3xl font-bold text-white mt-1">{unreadMessagesCount}</p>
-                <span className="text-[10px] font-mono text-[#60A5FA] mt-2 block">
+              <div className="premium-card p-5 rounded-2xl">
+                <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">Unread Inquiries</span>
+                <p className="text-3xl font-bold text-[#242424] mt-1">{unreadMessagesCount}</p>
+                <span className="text-[11px] font-semibold text-[#2563EB] mt-2 block">
                   {messages.length} Total Messages
                 </span>
               </div>
 
-              <div className="glass-panel p-5 rounded-2xl border-white/10">
-                <span className="text-[11px] font-mono text-zinc-400">Resume Status</span>
-                <p className="text-sm font-bold text-white mt-2 truncate">
+              <div className="premium-card p-5 rounded-2xl">
+                <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">Resume Status</span>
+                <p className="text-sm font-bold text-[#242424] mt-2 truncate">
                   {resume.filename || "Active"}
                 </p>
-                <span className="text-[10px] font-mono text-emerald-400 mt-2 block">
+                <span className="text-[11px] font-semibold text-[#059669] mt-2 block">
                   Download Ready
                 </span>
               </div>
             </div>
 
             {/* Quick Action Table */}
-            <div className="glass-panel p-6 rounded-3xl border-white/10">
+            <div className="premium-card p-6 rounded-3xl">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-base font-bold text-white">Recent Project Case Studies</h2>
+                <h2 className="text-base font-bold text-[#242424]">Recent Project Case Studies</h2>
                 <button
                   onClick={() => {
                     setActiveTab("projects");
                     setShowNewProject(true);
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-[#F4B400] text-black text-xs font-semibold flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 rounded-xl bg-[#1E3A5F] text-white text-xs font-semibold flex items-center gap-1.5 hover:bg-[#162C48] transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Project</span>
@@ -399,26 +394,26 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono">
+                <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-white/10 text-zinc-400">
-                      <th className="pb-3">Title</th>
-                      <th className="pb-3">Category</th>
-                      <th className="pb-3">Status</th>
-                      <th className="pb-3">Visibility</th>
+                    <tr className="border-b border-[#E2E8F0] text-[#64748B]">
+                      <th className="pb-3 font-semibold">Title</th>
+                      <th className="pb-3 font-semibold">Category</th>
+                      <th className="pb-3 font-semibold">Status</th>
+                      <th className="pb-3 font-semibold">Visibility</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-[#E2E8F0]">
                     {projects.slice(0, 5).map((p) => (
                       <tr key={p.id}>
-                        <td className="py-3 text-white font-medium">{p.title}</td>
-                        <td className="py-3 text-zinc-300">{p.category}</td>
-                        <td className="py-3 text-[#F4B400]">{p.status}</td>
+                        <td className="py-3 text-[#242424] font-bold">{p.title}</td>
+                        <td className="py-3 text-[#64748B]">{p.category}</td>
+                        <td className="py-3 text-[#1E3A5F] font-semibold">{p.status}</td>
                         <td className="py-3">
                           {p.isPublished ? (
-                            <span className="text-[#34C759]">Published</span>
+                            <span className="text-[#059669] font-semibold">Published</span>
                           ) : (
-                            <span className="text-zinc-500">Draft</span>
+                            <span className="text-[#94A3B8]">Draft</span>
                           )}
                         </td>
                       </tr>
@@ -435,58 +430,58 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Manage Projects</h1>
-                <p className="text-xs font-mono text-zinc-400 mt-1">Add, update, or remove case studies</p>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">Manage Projects</h1>
+                <p className="text-xs text-[#64748B] mt-1">Add, update, or remove case studies</p>
               </div>
               <button
                 onClick={() => setShowNewProject(!showNewProject)}
-                className="px-4 py-2 rounded-xl bg-[#F4B400] text-black text-xs sm:text-sm font-semibold flex items-center gap-2"
+                className="px-4 py-2 rounded-xl bg-[#1E3A5F] text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:bg-[#162C48] transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 <span>{showNewProject ? "Close Form" : "New Project"}</span>
               </button>
             </div>
 
-            {/* Create Project Modal/Drawer */}
+            {/* Create Project Drawer */}
             {showNewProject && (
-              <form onSubmit={handleCreateProject} className="glass-panel p-6 rounded-3xl border-white/20 space-y-4">
-                <h2 className="text-base font-bold text-white mb-2">Create New Project</h2>
+              <form onSubmit={handleCreateProject} className="premium-card p-6 rounded-3xl space-y-4">
+                <h2 className="text-base font-bold text-[#242424] mb-2">Create New Project</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-mono text-zinc-300 block mb-1">Title *</label>
+                    <label className="text-xs font-semibold text-[#242424] block mb-1">Title *</label>
                     <input
                       type="text"
                       required
                       value={newProject.title}
                       onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                      className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-mono text-zinc-300 block mb-1">Slug (URL) *</label>
+                    <label className="text-xs font-semibold text-[#242424] block mb-1">Slug (URL) *</label>
                     <input
                       type="text"
                       required
                       value={newProject.slug}
                       onChange={(e) => setNewProject({ ...newProject, slug: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                      className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-mono text-zinc-300 block mb-1">Category</label>
+                    <label className="text-xs font-semibold text-[#242424] block mb-1">Category</label>
                     <input
                       type="text"
                       value={newProject.category}
                       onChange={(e) => setNewProject({ ...newProject, category: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                      className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-mono text-zinc-300 block mb-1">Status</label>
+                    <label className="text-xs font-semibold text-[#242424] block mb-1">Status</label>
                     <select
                       value={newProject.status}
                       onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl glass-input text-xs bg-zinc-900"
+                      className="w-full px-3 py-2 rounded-xl premium-input text-xs bg-white"
                     >
                       <option value="CONCEPT">CONCEPT</option>
                       <option value="IN_PROGRESS">IN_PROGRESS</option>
@@ -497,20 +492,20 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs font-mono text-zinc-300 block mb-1">Summary *</label>
+                  <label className="text-xs font-semibold text-[#242424] block mb-1">Summary *</label>
                   <textarea
                     required
                     rows={3}
                     value={newProject.summary}
                     onChange={(e) => setNewProject({ ...newProject, summary: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                    className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2.5 rounded-xl bg-[#F4B400] text-black text-xs font-bold"
+                  className="px-5 py-2.5 rounded-xl bg-[#1E3A5F] text-white text-xs font-bold hover:bg-[#162C48] transition-colors"
                 >
                   Save Project
                 </button>
@@ -518,29 +513,29 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
             )}
 
             {/* Projects Table */}
-            <div className="glass-panel rounded-3xl border-white/10 overflow-hidden">
-              <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-white/[0.02] border-b border-white/10">
-                  <tr className="text-zinc-400">
-                    <th className="p-4">Title</th>
-                    <th className="p-4">Category</th>
-                    <th className="p-4">Status</th>
-                    <th className="p-4">Live URL</th>
-                    <th className="p-4 text-right">Actions</th>
+            <div className="premium-card rounded-3xl overflow-hidden">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-[#F8FAFC] border-b border-[#E2E8F0]">
+                  <tr className="text-[#64748B]">
+                    <th className="p-4 font-semibold">Title</th>
+                    <th className="p-4 font-semibold">Category</th>
+                    <th className="p-4 font-semibold">Status</th>
+                    <th className="p-4 font-semibold">Live URL</th>
+                    <th className="p-4 text-right font-semibold">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-[#E2E8F0]">
                   {projects.map((p) => (
-                    <tr key={p.id} className="hover:bg-white/[0.02]">
-                      <td className="p-4 text-white font-medium">{p.title}</td>
-                      <td className="p-4 text-zinc-300">{p.category}</td>
-                      <td className="p-4 text-[#F4B400]">{p.status}</td>
+                    <tr key={p.id} className="hover:bg-[#F8FAFC]">
+                      <td className="p-4 text-[#242424] font-bold">{p.title}</td>
+                      <td className="p-4 text-[#64748B]">{p.category}</td>
+                      <td className="p-4 text-[#1E3A5F] font-semibold">{p.status}</td>
                       <td className="p-4">
                         <a
                           href={`/projects/${p.slug}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-xs text-zinc-400 hover:text-white underline"
+                          className="text-xs text-[#1E3A5F] hover:underline font-semibold"
                         >
                           /{p.slug}
                         </a>
@@ -548,17 +543,17 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
                       <td className="p-4 text-right space-x-2">
                         <button
                           onClick={() => handleTogglePublish(p)}
-                          className={`px-2 py-1 rounded text-[11px] ${
+                          className={`px-2.5 py-1 rounded-md text-[11px] font-semibold ${
                             p.isPublished
-                              ? "bg-[#34C759]/20 text-[#34C759]"
-                              : "bg-zinc-800 text-zinc-400"
+                              ? "bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]"
+                              : "bg-[#F1F5F9] text-[#64748B]"
                           }`}
                         >
                           {p.isPublished ? "Published" : "Draft"}
                         </button>
                         <button
                           onClick={() => handleDeleteProject(p.id)}
-                          className="p-1 rounded text-red-400 hover:bg-red-500/10"
+                          className="p-1 rounded text-[#EF4444] hover:bg-[#FEF2F2]"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -575,34 +570,34 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
         {activeTab === "skills" && (
           <div className="space-y-6">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Skills Dashboard Config</h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">Configurable learning stages and display levels</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">Skills Dashboard Config</h1>
+              <p className="text-xs text-[#64748B] mt-1">Configurable learning stages and display levels</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {skills.map((category) => (
-                <div key={category.id} className="glass-panel p-6 rounded-2xl border-white/10 space-y-4">
-                  <h2 className="text-base font-bold text-[#F4B400]">{category.name}</h2>
+                <div key={category.id} className="premium-card p-6 rounded-2xl space-y-4">
+                  <h2 className="text-base font-bold text-[#1E3A5F]">{category.name}</h2>
                   <div className="space-y-2">
                     {category.skills.map((sk: any) => (
                       <div
                         key={sk.id}
-                        className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-between text-xs font-mono"
+                        className="p-2.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs"
                       >
-                        <span className="text-white font-medium">{sk.name}</span>
+                        <span className="text-[#242424] font-semibold">{sk.name}</span>
                         <div className="flex items-center gap-3">
                           <span
-                            className={`px-2 py-0.5 rounded text-[10px] ${
+                            className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                               sk.status === "PROFICIENT"
-                                ? "text-[#34C759] bg-[#34C759]/10"
+                                ? "text-[#059669] bg-[#ECFDF5]"
                                 : sk.status === "PRACTICING"
-                                ? "text-[#F4B400] bg-[#F4B400]/10"
-                                : "text-[#60A5FA] bg-[#60A5FA]/10"
+                                ? "text-[#D97706] bg-[#FFFBEB]"
+                                : "text-[#2563EB] bg-[#EFF6FF]"
                             }`}
                           >
                             {sk.status}
                           </span>
-                          <span className="text-zinc-400">{sk.ratingScore || 80}%</span>
+                          <span className="text-[#64748B] font-medium">{sk.ratingScore || 80}%</span>
                         </div>
                       </div>
                     ))}
@@ -617,100 +612,100 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
         {activeTab === "profile" && (
           <div className="max-w-3xl space-y-6">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Edit Profile & Contact Details</h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">Updates live values across all portfolio pages</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">Edit Profile & Contact Details</h1>
+              <p className="text-xs text-[#64748B] mt-1">Updates live values across all portfolio pages</p>
             </div>
 
-            <form onSubmit={handleSaveProfile} className="glass-panel p-8 rounded-3xl border-white/10 space-y-6">
+            <form onSubmit={handleSaveProfile} className="premium-card p-8 rounded-3xl space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">Full Name</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">Full Name</label>
                   <input
                     type="text"
                     value={profile.fullName}
                     onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">Email</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">Email</label>
                   <input
                     type="email"
                     value={profile.email}
                     onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">Phone</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">Phone</label>
                   <input
                     type="text"
                     value={profile.phone}
                     onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">LinkedIn Profile URL</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">LinkedIn Profile URL</label>
                   <input
                     type="url"
                     value={profile.linkedinUrl || ""}
                     placeholder="https://linkedin.com/in/username"
                     onChange={(e) => setProfile({ ...profile, linkedinUrl: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-1.5">Availability Status</label>
+                <label className="block text-xs font-semibold text-[#242424] mb-1.5">Availability Status</label>
                 <input
                   type="text"
                   value={profile.availabilityStatus}
                   onChange={(e) => setProfile({ ...profile, availabilityStatus: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-1.5">Bio</label>
+                <label className="block text-xs font-semibold text-[#242424] mb-1.5">Bio</label>
                 <textarea
                   rows={3}
                   value={profile.bio}
                   onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl glass-input text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl premium-input text-xs"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">What I Build</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">What I Build</label>
                   <textarea
                     rows={3}
                     value={profile.whatIBuild}
                     onChange={(e) => setProfile({ ...profile, whatIBuild: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                    className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">What I Am Learning</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">What I Am Learning</label>
                   <textarea
                     rows={3}
                     value={profile.whatIAmLearning}
                     onChange={(e) => setProfile({ ...profile, whatIAmLearning: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                    className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono text-zinc-300 mb-1.5">What I Want to Build Next</label>
+                  <label className="block text-xs font-semibold text-[#242424] mb-1.5">What I Want to Build Next</label>
                   <textarea
                     rows={3}
                     value={profile.whatIWantToBuildNext}
                     onChange={(e) => setProfile({ ...profile, whatIWantToBuildNext: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl glass-input text-xs"
+                    className="w-full px-3 py-2 rounded-xl premium-input text-xs"
                   />
                 </div>
               </div>
@@ -718,7 +713,7 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
               <button
                 type="submit"
                 disabled={saving}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F4B400] text-black text-xs font-bold hover:bg-[#FFF4D6] transition-colors"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1E3A5F] text-white text-xs font-bold hover:bg-[#162C48] transition-colors shadow-xs"
               >
                 <Save className="w-4 h-4" />
                 <span>{saving ? "Saving..." : "Save Profile Changes"}</span>
@@ -731,54 +726,54 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
         {activeTab === "inbox" && (
           <div className="space-y-6">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Contact Submissions</h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">Inquiries submitted from the public contact form</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">Contact Submissions</h1>
+              <p className="text-xs text-[#64748B] mt-1">Inquiries submitted from the public contact form</p>
             </div>
 
             <div className="space-y-4">
               {messages.length === 0 ? (
-                <div className="glass-panel p-12 text-center rounded-3xl border-white/10 text-zinc-400 text-xs font-mono">
+                <div className="premium-card p-12 text-center rounded-3xl text-[#64748B] text-xs">
                   No contact messages received yet.
                 </div>
               ) : (
                 messages.map((msg) => (
                   <div
                     key={msg.id}
-                    className={`glass-panel p-6 rounded-2xl border-white/10 space-y-3 transition-colors ${
-                      !msg.isRead ? "border-l-4 border-l-[#F4B400]" : ""
+                    className={`premium-card p-6 rounded-2xl space-y-3 transition-colors ${
+                      !msg.isRead ? "border-l-4 border-l-[#1E3A5F]" : ""
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-3">
-                        <span className="text-sm font-bold text-white">{msg.name}</span>
+                        <span className="text-sm font-bold text-[#242424]">{msg.name}</span>
                         <a
                           href={`mailto:${msg.email}`}
-                          className="text-xs text-[#F4B400] font-mono hover:underline"
+                          className="text-xs text-[#1E3A5F] font-semibold hover:underline"
                         >
                           {msg.email}
                         </a>
                       </div>
-                      <span className="text-[10px] font-mono text-zinc-400">
+                      <span className="text-[10px] text-[#94A3B8]">
                         {new Date(msg.createdAt).toLocaleString()}
                       </span>
                     </div>
 
-                    <h2 className="text-xs font-bold text-zinc-300">Subject: {msg.subject}</h2>
+                    <h2 className="text-xs font-bold text-[#475569]">Subject: {msg.subject}</h2>
 
-                    <p className="text-xs text-zinc-300 whitespace-pre-wrap bg-white/[0.02] p-3 rounded-xl border border-white/5">
+                    <p className="text-xs text-[#64748B] whitespace-pre-wrap bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
                       {msg.message}
                     </p>
 
                     <div className="flex items-center justify-end gap-3 pt-2">
                       <button
                         onClick={() => handleToggleRead(msg.id, msg.isRead)}
-                        className="text-xs font-mono text-zinc-400 hover:text-white"
+                        className="text-xs font-semibold text-[#64748B] hover:text-[#1E3A5F]"
                       >
                         {msg.isRead ? "Mark Unread" : "Mark Read"}
                       </button>
                       <button
                         onClick={() => handleDeleteMessage(msg.id)}
-                        className="text-xs font-mono text-red-400 hover:underline"
+                        className="text-xs font-semibold text-[#EF4444] hover:underline"
                       >
                         Delete
                       </button>
@@ -794,34 +789,34 @@ export const AdminDashboardClient: React.FC<AdminDashboardClientProps> = ({
         {activeTab === "resume" && (
           <div className="max-w-xl space-y-6">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Resume Management</h1>
-              <p className="text-xs font-mono text-zinc-400 mt-1">Upload and replace current downloadable PDF resume</p>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#242424]">Resume Management</h1>
+              <p className="text-xs text-[#64748B] mt-1">Upload and replace current downloadable PDF resume</p>
             </div>
 
-            <div className="glass-panel p-8 rounded-3xl border-white/10 space-y-6">
-              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-between">
+            <div className="premium-card p-8 rounded-3xl space-y-6">
+              <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-mono text-zinc-400 block">Current Active Resume:</span>
-                  <span className="text-sm font-bold text-white mt-1 block">
+                  <span className="text-xs text-[#64748B] block">Current Active Resume:</span>
+                  <span className="text-sm font-bold text-[#242424] mt-1 block">
                     {resume.filename || "Shiva_Bharti_Resume.pdf"}
                   </span>
                 </div>
                 <a
                   href="/api/resume"
                   download
-                  className="px-3 py-1.5 rounded-xl bg-white/[0.05] border border-white/10 text-xs font-mono text-[#FFF4D6] hover:bg-white/[0.08]"
+                  className="px-3.5 py-1.5 rounded-xl bg-white border border-[#E2E8F0] text-xs font-semibold text-[#1E3A5F] hover:bg-[#EEF4FA] shadow-xs"
                 >
                   Download
                 </a>
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-2">
+                <label className="block text-xs font-semibold text-[#242424] mb-2">
                   Upload New PDF Resume (Max 5MB)
                 </label>
-                <label className="flex flex-col items-center justify-center border-2 border-dashed border-white/20 hover:border-[#F4B400] rounded-2xl p-8 cursor-pointer transition-colors bg-white/[0.02]">
-                  <Upload className="w-8 h-8 text-[#F4B400] mb-2" />
-                  <span className="text-xs font-mono text-zinc-300">Click to select PDF document</span>
+                <label className="flex flex-col items-center justify-center border-2 border-dashed border-[#CBD5E1] hover:border-[#1E3A5F] rounded-2xl p-8 cursor-pointer transition-colors bg-[#F8FAFC]">
+                  <Upload className="w-8 h-8 text-[#1E3A5F] mb-2" />
+                  <span className="text-xs font-semibold text-[#475569]">Click to select PDF document</span>
                   <input
                     type="file"
                     accept="application/pdf"

@@ -55,14 +55,14 @@ export const GitHubSection: React.FC<GitHubSectionProps> = ({
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-white/10 text-xs font-mono text-[#F4B400] mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF4FA] border border-[#CBD5E1]/70 text-xs font-semibold text-[#1E3A5F] mb-3">
             <GithubIcon className="w-3.5 h-3.5" />
             <span>04 / OPEN SOURCE & CODE REPOSITORIES</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#242424] tracking-tight">
             GitHub Activity & Repositories.
           </h2>
-          <p className="mt-4 text-[#A1A1AA] text-base max-w-xl leading-relaxed">
+          <p className="mt-3.5 text-[#64748B] text-base max-w-xl leading-relaxed">
             Live public repositories fetched via GitHub REST API with caching and fallback safeguards.
           </p>
         </div>
@@ -71,19 +71,19 @@ export const GitHubSection: React.FC<GitHubSectionProps> = ({
           href={`https://github.com/${username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold glass-panel text-white hover:border-[#F4B400]/40 transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white border border-[#E2E8F0] text-[#1E3A5F] hover:bg-[#F8FAFC] hover:border-[#CBD5E1] transition-colors shadow-sm"
         >
-          <GithubIcon className="w-4 h-4 text-[#F4B400]" />
+          <GithubIcon className="w-4 h-4 text-[#1E3A5F]" />
           <span>github.com/{username}</span>
-          <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+          <ExternalLink className="w-3.5 h-3.5 text-[#64748B]" />
         </a>
       </div>
 
       {/* Loading state */}
       {loading && (
-        <div className="flex flex-col items-center justify-center py-20 glass-panel rounded-3xl border-white/10 gap-3">
-          <RefreshCw className="w-6 h-6 text-[#F4B400] animate-spin" />
-          <p className="text-xs font-mono text-zinc-400">Fetching live repositories from GitHub API...</p>
+        <div className="flex flex-col items-center justify-center py-20 premium-card rounded-3xl gap-3">
+          <RefreshCw className="w-6 h-6 text-[#1E3A5F] animate-spin" />
+          <p className="text-xs font-semibold text-[#64748B]">Fetching live repositories from GitHub API...</p>
         </div>
       )}
 
@@ -96,33 +96,33 @@ export const GitHubSection: React.FC<GitHubSectionProps> = ({
               href={repo.htmlUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-panel p-6 rounded-2xl border-white/10 hover:border-[#F4B400]/40 transition-all block group flex flex-col justify-between"
+              className="premium-card p-6 rounded-2xl block group flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <h3 className="text-base font-bold text-white group-hover:text-[#FFF4D6] transition-colors truncate">
+                  <h3 className="text-base font-bold text-[#242424] group-hover:text-[#1E3A5F] transition-colors truncate">
                     {repo.name}
                   </h3>
-                  <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-[#F4B400] transition-colors flex-shrink-0" />
+                  <ExternalLink className="w-4 h-4 text-[#94A3B8] group-hover:text-[#1E3A5F] transition-colors flex-shrink-0" />
                 </div>
-                <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">
+                <p className="text-xs text-[#64748B] line-clamp-2 leading-relaxed mb-4">
                   {repo.description || "Public repository for ongoing software and automation development."}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs font-mono text-zinc-400">
-                <span className="flex items-center gap-1.5 text-zinc-300">
-                  <span className="w-2 h-2 rounded-full bg-[#F4B400]" />
+              <div className="flex items-center justify-between pt-4 border-t border-[#E2E8F0] text-xs text-[#64748B]">
+                <span className="flex items-center gap-1.5 font-semibold text-[#242424]">
+                  <span className="w-2 h-2 rounded-full bg-[#1E3A5F]" />
                   {repo.language || "Code"}
                 </span>
 
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 text-yellow-400/80" />
+                    <Star className="w-3.5 h-3.5 text-[#D97706]" />
                     {repo.stars}
                   </span>
                   <span className="flex items-center gap-1">
-                    <GitFork className="w-3.5 h-3.5 text-zinc-400" />
+                    <GitFork className="w-3.5 h-3.5 text-[#64748B]" />
                     {repo.forks}
                   </span>
                 </div>
@@ -134,17 +134,17 @@ export const GitHubSection: React.FC<GitHubSectionProps> = ({
 
       {/* Graceful Fallback if API rate limited or no repos */}
       {!loading && repos.length === 0 && (
-        <div className="glass-panel p-10 rounded-3xl border-white/10 text-center">
-          <GithubIcon className="w-10 h-10 text-zinc-500 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-white mb-2">GitHub Repositories Active</h3>
-          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto mb-6">
+        <div className="premium-card p-10 rounded-3xl text-center">
+          <GithubIcon className="w-10 h-10 text-[#94A3B8] mx-auto mb-3" />
+          <h3 className="text-base font-bold text-[#242424] mb-2">GitHub Repositories Active</h3>
+          <p className="text-xs sm:text-sm text-[#64748B] max-w-md mx-auto mb-6">
             {error || "GitHub rate limits apply for unauthenticated requests. You can explore all open-source repositories directly on Shiva's profile."}
           </p>
           <a
             href={`https://github.com/${username}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#F4B400] text-black font-semibold text-xs transition-colors hover:bg-[#FFF4D6]"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#1E3A5F] text-white font-semibold text-xs transition-colors hover:bg-[#162C48]"
           >
             <span>Visit @{username} on GitHub</span>
             <ExternalLink className="w-3.5 h-3.5" />

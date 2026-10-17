@@ -1,101 +1,120 @@
 @import "tailwindcss";
 
 :root {
-  --background: #080808;
-  --secondary-background: #101010;
-  --glass-surface: rgba(255, 255, 255, 0.045);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-hover: rgba(244, 180, 0, 0.35);
-  --primary-text: #ffffff;
-  --secondary-text: #a1a1aa;
-  --accent-yellow: #f4b400;
-  --accent-cream: #fff4d6;
-  --success: #34c759;
-  --error: #ff4d4f;
+  --background: #FFFFFF;
+  --secondary-background: #F5F7FA;
+  --surface: #FFFFFF;
+  --surface-muted: #F8FAFC;
+  --border: #E2E8F0;
+  --border-focus: #1E3A5F;
+  --text-heading: #242424;
+  --text-body: #64748B;
+  --text-muted: #94A3B8;
+  --primary-accent: #1E3A5F;
+  --primary-accent-hover: #162C48;
+  --primary-accent-light: #EEF4FA;
+  --accent-gold: #D97706;
+  --success: #10B981;
+  --error: #EF4444;
 }
 
-
 body {
-  background-color: #080808;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--text-body);
+  font-family: var(--font-sans, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
-  selection-background-color: #f4b400;
-  selection-color: #080808;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: rgba(244, 180, 0, 0.3);
-  color: #fff4d6;
+  background-color: #1E3A5F;
+  color: #FFFFFF;
 }
 
-/* Glassmorphism utility classes */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.045);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+/* Premium Card Styles */
+.premium-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-panel-subtle {
-  background: rgba(255, 255, 255, 0.025);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.065);
-  border-color: rgba(244, 180, 0, 0.35);
-  box-shadow: 0 12px 40px 0 rgba(244, 180, 0, 0.08);
+.premium-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 25px -5px rgba(30, 58, 95, 0.08), 0 8px 10px -6px rgba(30, 58, 95, 0.04);
   transform: translateY(-2px);
 }
 
-.glass-input {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  color: #ffffff;
+.premium-card-muted {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+}
+
+/* Input Fields */
+.premium-input {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #242424;
   transition: all 0.2s ease;
 }
 
-.glass-input:focus {
+.premium-input:focus {
   outline: none;
-  border-color: #f4b400;
-  box-shadow: 0 0 15px rgba(244, 180, 0, 0.2);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: #1E3A5F;
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+  background: #FFFFFF;
 }
 
-/* Glowing background ambient lights */
-.ambient-glow-yellow {
-  background: radial-gradient(circle, rgba(244, 180, 0, 0.15) 0%, rgba(244, 180, 0, 0) 70%);
+/* Primary Button Styling */
+.btn-primary {
+  background-color: #1E3A5F;
+  color: #FFFFFF;
+  font-weight: 600;
+  border: 1px solid #1E3A5F;
+  box-shadow: 0 1px 2px 0 rgba(30, 58, 95, 0.2);
+  transition: all 0.2s ease;
 }
 
-.ambient-glow-cream {
-  background: radial-gradient(circle, rgba(255, 244, 214, 0.08) 0%, rgba(255, 244, 214, 0) 70%);
+.btn-primary:hover {
+  background-color: #162C48;
+  border-color: #162C48;
+  box-shadow: 0 4px 12px 0 rgba(30, 58, 95, 0.25);
+  transform: translateY(-1px);
 }
 
-/* Custom Scrollbar */
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #1E3A5F;
+  font-weight: 600;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #162C48;
+}
+
+/* Custom Clean Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #080808;
+  background: #F8FAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: #CBD5E1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(244, 180, 0, 0.4);
+  background: #94A3B8;
 }
 
 /* Accessibility: Reduced motion overrides */

@@ -7,12 +7,9 @@ import {
   FolderGit2,
   ExternalLink,
   Search,
-  Filter,
   CheckCircle2,
   Clock,
-  Lightbulb,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { GithubIcon } from "./SocialIcons";
 
@@ -58,11 +55,11 @@ const CATEGORIES = [
   "Startup Products",
 ];
 
-const STATUS_CONFIG: Record<string, { label: string; color: string; border: string }> = {
-  CONCEPT: { label: "Concept", color: "text-[#60A5FA] bg-[#60A5FA]/10", border: "border-[#60A5FA]/30" },
-  IN_PROGRESS: { label: "In Progress", color: "text-[#F4B400] bg-[#F4B400]/10", border: "border-[#F4B400]/30" },
-  COMPLETED: { label: "Completed", color: "text-[#34C759] bg-[#34C759]/10", border: "border-[#34C759]/30" },
-  PUBLISHED: { label: "Published", color: "text-[#A78BFA] bg-[#A78BFA]/10", border: "border-[#A78BFA]/30" },
+const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  CONCEPT: { label: "Concept", color: "text-[#2563EB]", bg: "bg-[#EFF6FF]", border: "border-[#BFDBFE]" },
+  IN_PROGRESS: { label: "In Progress", color: "text-[#D97706]", bg: "bg-[#FFFBEB]", border: "border-[#FDE68A]" },
+  COMPLETED: { label: "Completed", color: "text-[#059669]", bg: "bg-[#ECFDF5]", border: "border-[#A7F3D0]" },
+  PUBLISHED: { label: "Published", color: "text-[#1E3A5F]", bg: "bg-[#EEF4FA]", border: "border-[#CBD5E1]" },
 };
 
 export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
@@ -93,14 +90,14 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
     >
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-white/10 text-xs font-mono text-[#F4B400] mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF4FA] border border-[#CBD5E1]/70 text-xs font-semibold text-[#1E3A5F] mb-3">
           <FolderGit2 className="w-3.5 h-3.5" />
           <span>03 / FEATURED PROJECTS & CASE STUDIES</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#242424] tracking-tight">
           Engineered Digital Products.
         </h2>
-        <p className="mt-4 text-[#A1A1AA] text-base sm:text-lg max-w-2xl leading-relaxed">
+        <p className="mt-3.5 text-[#64748B] text-base sm:text-lg max-w-2xl leading-relaxed">
           Detailed case studies and engineering architectural breakdowns across full-stack systems, mobile apps, automation pipelines, and AI concepts.
         </p>
       </div>
@@ -113,10 +110,10 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 selectedCategory === cat
-                  ? "bg-[#F4B400] text-black font-semibold shadow-[0_0_15px_rgba(244,180,0,0.3)]"
-                  : "glass-panel-subtle text-zinc-400 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-[#1E3A5F] text-white shadow-sm"
+                  : "bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] hover:bg-[#F1F5F9] hover:text-[#242424]"
               }`}
             >
               {cat}
@@ -126,13 +123,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
 
         {/* Search Bar */}
         <div className="relative w-full md:w-64">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search projects or tech..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl glass-input text-xs sm:text-sm placeholder:text-zinc-500"
+            className="w-full pl-10 pr-4 py-2 rounded-xl premium-input text-xs sm:text-sm placeholder:text-[#94A3B8]"
           />
         </div>
       </div>
@@ -146,53 +143,50 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
             return (
               <motion.div
                 key={project.id || project.slug}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="group glass-panel rounded-3xl p-6 border-white/10 hover:border-[#F4B400]/40 transition-all flex flex-col justify-between relative overflow-hidden"
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25, delay: idx * 0.04 }}
+                className="group premium-card rounded-3xl p-6 flex flex-col justify-between"
               >
-                {/* Ambient Hover Glow */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#F4B400]/5 rounded-bl-full pointer-events-none group-hover:bg-[#F4B400]/15 transition-colors" />
-
                 <div>
                   {/* Top Bar: Category & Status */}
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                  <div className="flex items-center justify-between gap-2 mb-3.5">
+                    <span className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">
                       {project.category}
                     </span>
                     <span
-                      className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium border ${statusConfig.border} ${statusConfig.color}`}
+                      className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${statusConfig.border} ${statusConfig.bg} ${statusConfig.color}`}
                     >
                       {statusConfig.label}
                     </span>
                   </div>
 
                   {/* Project Title */}
-                  <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-[#FFF4D6] transition-colors">
+                  <h3 className="text-xl font-bold text-[#242424] mb-2 group-hover:text-[#1E3A5F] transition-colors">
                     {project.title}
                   </h3>
 
                   {/* Short Summary */}
-                  <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed mb-4 line-clamp-3">
+                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed mb-4 line-clamp-3">
                     {project.summary}
                   </p>
 
-                  {/* Feature Highlights (Completed vs Planned indicator) */}
+                  {/* Feature Highlights */}
                   {project.features && project.features.length > 0 && (
-                    <div className="mb-4 space-y-1.5 pt-3 border-t border-white/10">
-                      <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                    <div className="mb-4 space-y-1.5 pt-3 border-t border-[#E2E8F0]">
+                      <span className="text-[11px] font-semibold text-[#94A3B8] uppercase tracking-wider block mb-1">
                         Module Roadmap:
                       </span>
                       {project.features.slice(0, 2).map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-2 text-xs text-zinc-300">
+                        <div key={fIdx} className="flex items-center gap-2 text-xs text-[#475569]">
                           {feat.isCompleted ? (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#34C759] flex-shrink-0" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#059669] flex-shrink-0" />
                           ) : (
-                            <Clock className="w-3.5 h-3.5 text-zinc-400 flex-shrink-0" />
+                            <Clock className="w-3.5 h-3.5 text-[#94A3B8] flex-shrink-0" />
                           )}
                           <span className="truncate">{feat.title}</span>
-                          <span className="text-[10px] font-mono text-zinc-400">
+                          <span className="text-[10px] text-[#94A3B8] font-medium">
                             {feat.isCompleted ? "(Built)" : "(Planned)"}
                           </span>
                         </div>
@@ -205,13 +199,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                     {project.technologies?.slice(0, 4).map((tech) => (
                       <span
                         key={tech.name}
-                        className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-[11px] font-mono text-zinc-300"
+                        className="px-2.5 py-1 rounded-md bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-semibold text-[#1E3A5F]"
                       >
                         {tech.name}
                       </span>
                     ))}
                     {project.technologies && project.technologies.length > 4 && (
-                      <span className="px-2 py-0.5 rounded-md bg-white/[0.04] text-[11px] font-mono text-zinc-400">
+                      <span className="px-2 py-0.5 rounded-md bg-[#F1F5F9] text-[11px] font-semibold text-[#64748B]">
                         +{project.technologies.length - 4}
                       </span>
                     )}
@@ -219,10 +213,10 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                 </div>
 
                 {/* Bottom Card Actions */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between gap-3">
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F4B400] hover:text-[#FFF4D6] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1E3A5F] hover:text-[#162C48] transition-colors"
                   >
                     <span>Read Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -235,7 +229,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                         target="_blank"
                         rel="noopener noreferrer"
                         title="GitHub Repository"
-                        className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors"
+                        className="p-1.5 rounded-lg text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F1F5F9] transition-colors"
                       >
                         <GithubIcon className="w-4 h-4" />
                       </a>
@@ -246,7 +240,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Live Demo"
-                        className="p-1.5 rounded-lg text-zinc-400 hover:text-[#F4B400] hover:bg-white/[0.06] transition-colors"
+                        className="p-1.5 rounded-lg text-[#64748B] hover:text-[#1E3A5F] hover:bg-[#F1F5F9] transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -260,8 +254,8 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
       </div>
 
       {filteredProjects.length === 0 && (
-        <div className="text-center py-16 glass-panel rounded-3xl border-white/10">
-          <p className="text-zinc-400 text-sm font-mono">No projects found matching the filter.</p>
+        <div className="text-center py-16 premium-card rounded-3xl">
+          <p className="text-[#64748B] text-sm">No projects found matching the filter.</p>
         </div>
       )}
     </section>

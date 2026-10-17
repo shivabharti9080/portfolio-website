@@ -59,19 +59,16 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
       aria-label="Contact Shiva Bharti"
       className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative"
     >
-      {/* Background glow */}
-      <div className="absolute bottom-10 right-10 w-96 h-96 ambient-glow-yellow rounded-full blur-3xl opacity-20 pointer-events-none" />
-
       {/* Section Header */}
       <div className="flex flex-col items-start mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-white/10 text-xs font-mono text-[#F4B400] mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF4FA] border border-[#CBD5E1]/70 text-xs font-semibold text-[#1E3A5F] mb-3">
           <Mail className="w-3.5 h-3.5" />
           <span>07 / GET IN TOUCH</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#242424] tracking-tight">
           Let&apos;s Build Something Meaningful.
         </h2>
-        <p className="mt-4 text-[#A1A1AA] text-base sm:text-lg max-w-2xl leading-relaxed">
+        <p className="mt-3.5 text-[#64748B] text-base sm:text-lg max-w-2xl leading-relaxed">
           Whether you want to discuss full-stack projects, mobile apps, automation workflows, or AI prototypes, feel free to send a message.
         </p>
       </div>
@@ -79,20 +76,20 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* Direct Contact Information Cards */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="glass-panel p-6 rounded-3xl border-white/10 hover:border-[#F4B400]/40 transition-colors">
-            <h3 className="text-base font-bold text-white mb-4">Direct Channels</h3>
+          <div className="premium-card p-6 rounded-3xl">
+            <h3 className="text-base font-bold text-[#242424] mb-4">Direct Channels</h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               <a
                 href={`mailto:${profile.email}`}
-                className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] transition-colors group"
+                className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#EEF4FA] hover:border-[#CBD5E1] transition-colors group"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#F4B400]/10 border border-[#F4B400]/30 flex items-center justify-center text-[#F4B400] group-hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[#CBD5E1] flex items-center justify-center text-[#1E3A5F] group-hover:scale-105 transition-transform shadow-xs">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono text-zinc-400 block">Email Address</span>
-                  <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-[#FFF4D6] transition-colors">
+                  <span className="text-[11px] font-semibold text-[#94A3B8] block uppercase tracking-wider">Email Address</span>
+                  <span className="text-xs sm:text-sm font-bold text-[#242424] group-hover:text-[#1E3A5F] transition-colors">
                     {profile.email}
                   </span>
                 </div>
@@ -100,14 +97,14 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
 
               <a
                 href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] transition-colors group"
+                className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#EEF4FA] hover:border-[#CBD5E1] transition-colors group"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#34C759]/10 border border-[#34C759]/30 flex items-center justify-center text-[#34C759] group-hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[#CBD5E1] flex items-center justify-center text-[#059669] group-hover:scale-105 transition-transform shadow-xs">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono text-zinc-400 block">Phone / Mobile</span>
-                  <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-[#FFF4D6] transition-colors">
+                  <span className="text-[11px] font-semibold text-[#94A3B8] block uppercase tracking-wider">Phone / Mobile</span>
+                  <span className="text-xs sm:text-sm font-bold text-[#242424] group-hover:text-[#1E3A5F] transition-colors">
                     {profile.phone}
                   </span>
                 </div>
@@ -117,14 +114,14 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
                 href={profile.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] transition-colors group"
+                className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#EEF4FA] hover:border-[#CBD5E1] transition-colors group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/20 flex items-center justify-center text-white group-hover:scale-105 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[#CBD5E1] flex items-center justify-center text-[#1E3A5F] group-hover:scale-105 transition-transform shadow-xs">
                   <GithubIcon className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono text-zinc-400 block">GitHub Profile</span>
-                  <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-[#FFF4D6] transition-colors">
+                  <span className="text-[11px] font-semibold text-[#94A3B8] block uppercase tracking-wider">GitHub Profile</span>
+                  <span className="text-xs sm:text-sm font-bold text-[#242424] group-hover:text-[#1E3A5F] transition-colors">
                     github.com/shivabharti9080
                   </span>
                 </div>
@@ -135,14 +132,14 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
                   href={profile.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.07] transition-colors group"
+                  className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] hover:bg-[#EEF4FA] hover:border-[#CBD5E1] transition-colors group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#60A5FA]/10 border border-[#60A5FA]/30 flex items-center justify-center text-[#60A5FA] group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-[#CBD5E1] flex items-center justify-center text-[#2563EB] group-hover:scale-105 transition-transform shadow-xs">
                     <LinkedinIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-mono text-zinc-400 block">LinkedIn Profile</span>
-                    <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-[#FFF4D6] transition-colors">
+                    <span className="text-[11px] font-semibold text-[#94A3B8] block uppercase tracking-wider">LinkedIn Profile</span>
+                    <span className="text-xs sm:text-sm font-bold text-[#242424] group-hover:text-[#1E3A5F] transition-colors">
                       Connect on LinkedIn
                     </span>
                   </div>
@@ -152,9 +149,9 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
           </div>
 
           {/* Quick Notice Card */}
-          <div className="glass-panel p-6 rounded-3xl border-white/10 text-xs font-mono text-zinc-400 space-y-2">
-            <p className="flex items-center gap-2 text-zinc-200 font-semibold">
-              <Sparkles className="w-4 h-4 text-[#F4B400]" />
+          <div className="premium-card p-6 rounded-3xl text-xs text-[#64748B] space-y-2">
+            <p className="flex items-center gap-2 text-[#242424] font-bold">
+              <Sparkles className="w-4 h-4 text-[#1E3A5F]" />
               Response Commitment
             </p>
             <p className="leading-relaxed">
@@ -167,17 +164,17 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
         <div className="lg:col-span-7">
           <form
             onSubmit={handleSubmit}
-            className="glass-panel p-8 sm:p-10 rounded-3xl border-white/10 space-y-6"
+            className="premium-card p-8 sm:p-10 rounded-3xl space-y-6"
           >
             {success && (
-              <div className="p-4 rounded-2xl bg-[#34C759]/15 border border-[#34C759]/30 flex items-center gap-3 text-xs sm:text-sm text-emerald-300">
+              <div className="p-4 rounded-2xl bg-[#ECFDF5] border border-[#A7F3D0] flex items-center gap-3 text-xs sm:text-sm text-[#065F46]">
                 <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
                 <span>{success}</span>
               </div>
             )}
 
             {error && (
-              <div className="p-4 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center gap-3 text-xs sm:text-sm text-red-300">
+              <div className="p-4 rounded-2xl bg-[#FEF2F2] border border-[#FECACA] flex items-center gap-3 text-xs sm:text-sm text-[#991B1B]">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -185,58 +182,58 @@ export const ContactSection: React.FC<ContactProps> = ({ profile }) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-2">Your Name *</label>
+                <label className="block text-xs font-semibold text-[#242424] mb-2">Your Name *</label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Alex Morgan"
-                  className="w-full px-4 py-3 rounded-xl glass-input text-sm placeholder:text-zinc-600"
+                  className="w-full px-4 py-3 rounded-xl premium-input text-sm placeholder:text-[#94A3B8]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-zinc-300 mb-2">Email Address *</label>
+                <label className="block text-xs font-semibold text-[#242424] mb-2">Email Address *</label>
                 <input
                   type="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="alex@domain.com"
-                  className="w-full px-4 py-3 rounded-xl glass-input text-sm placeholder:text-zinc-600"
+                  className="w-full px-4 py-3 rounded-xl premium-input text-sm placeholder:text-[#94A3B8]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-zinc-300 mb-2">Subject *</label>
+              <label className="block text-xs font-semibold text-[#242424] mb-2">Subject *</label>
               <input
                 type="text"
                 required
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                placeholder="Collaboration, Full-Stack Project, or Job Opportunity"
-                className="w-full px-4 py-3 rounded-xl glass-input text-sm placeholder:text-zinc-600"
+                placeholder="Collaboration, Full-Stack Project, or Engineering Role"
+                className="w-full px-4 py-3 rounded-xl premium-input text-sm placeholder:text-[#94A3B8]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono text-zinc-300 mb-2">Message *</label>
+              <label className="block text-xs font-semibold text-[#242424] mb-2">Message *</label>
               <textarea
                 required
                 rows={5}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Tell me about your project, idea, or questions..."
-                className="w-full px-4 py-3 rounded-xl glass-input text-sm placeholder:text-zinc-600 resize-none"
+                className="w-full px-4 py-3 rounded-xl premium-input text-sm placeholder:text-[#94A3B8] resize-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-sm font-semibold text-[#080808] bg-[#F4B400] hover:bg-[#FFF4D6] shadow-[0_0_20px_rgba(244,180,0,0.3)] transition-all disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl text-sm font-semibold text-white bg-[#1E3A5F] hover:bg-[#162C48] shadow-sm hover:shadow transition-all disabled:opacity-50"
             >
               {loading ? (
                 <span>Sending Securely...</span>

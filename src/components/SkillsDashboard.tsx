@@ -18,7 +18,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { Cpu, Layers, Activity, Calendar, Sparkles, Filter } from "lucide-react";
+import { Cpu, Layers, Activity, Calendar, CheckCircle2 } from "lucide-react";
 
 interface SkillItem {
   id: string;
@@ -50,13 +50,13 @@ interface SkillsDashboardProps {
   milestones: LearningMilestone[];
 }
 
-const STATUS_COLORS: Record<string, string> = {
-  LEARNING: "#60A5FA",     // Soft blue
-  PRACTICING: "#F4B400",   // Accent yellow
-  PROFICIENT: "#34C759",   // Success green
+const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  LEARNING: { label: "Learning", color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE" },
+  PRACTICING: { label: "Practicing", color: "#D97706", bg: "#FFFBEB", border: "#FDE68A" },
+  PROFICIENT: { label: "Proficient", color: "#1E3A5F", bg: "#EEF4FA", border: "#CBD5E1" },
 };
 
-const PIE_COLORS = ["#F4B400", "#FFF4D6", "#34C759", "#60A5FA", "#A78BFA", "#F472B6", "#9CA3AF"];
+const PIE_COLORS = ["#1E3A5F", "#2563EB", "#0284C7", "#0D9488", "#10B981", "#6366F1", "#8B5CF6"];
 
 export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, milestones }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -69,7 +69,6 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
     categories.forEach((cat) => {
       if (selectedCategory === "All" || selectedCategory === cat.name) {
         cat.skills.forEach((s) => {
-          // If ratingScore exists use it, otherwise derive meaningful representation from honest status
           const fallbackScore = s.status === "PROFICIENT" ? 85 : s.status === "PRACTICING" ? 65 : 45;
           list.push({
             name: s.name,
@@ -81,10 +80,10 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
       }
     });
 
-    return list.slice(0, 16); // Clean display
+    return list.slice(0, 16);
   }, [categories, selectedCategory]);
 
-  // Radar Chart Data (Aggregate by categories)
+  // Radar Chart Data
   const radarChartData = useMemo(() => {
     return categories.map((cat) => {
       const scores = cat.skills.map((s) => s.ratingScore || (s.status === "PROFICIENT" ? 85 : s.status === "PRACTICING" ? 65 : 45));
@@ -98,7 +97,7 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
     });
   }, [categories]);
 
-  // Distribution Data (Category count)
+  // Distribution Data
   const distributionData = useMemo(() => {
     return categories.map((cat) => ({
       name: cat.name,
@@ -110,33 +109,33 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
     <section
       id="skills"
       aria-label="Interactive Skills Dashboard and Proficiency Graphs"
-      className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative"
+      className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative bg-[#F5F7FA]/60 rounded-3xl my-8 border border-[#E2E8F0]"
     >
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel border-white/10 text-xs font-mono text-[#F4B400] mb-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF4FA] border border-[#CBD5E1]/70 text-xs font-semibold text-[#1E3A5F] mb-3">
           <Cpu className="w-3.5 h-3.5" />
           <span>02 / TECHNICAL COMPETENCY</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#242424] tracking-tight">
           Interactive Skills Dashboard.
         </h2>
-        <p className="mt-4 text-[#A1A1AA] text-base sm:text-lg max-w-2xl leading-relaxed">
+        <p className="mt-3.5 text-[#64748B] text-base sm:text-lg max-w-2xl leading-relaxed">
           Honest technical overview categorized by developmental phases:{" "}
-          <span className="text-[#60A5FA] font-medium">Learning</span>,{" "}
-          <span className="text-[#F4B400] font-medium">Practicing</span>, and{" "}
-          <span className="text-[#34C759] font-medium">Proficient</span>. Sourced dynamically from PostgreSQL database records.
+          <span className="text-[#2563EB] font-semibold">Learning</span>,{" "}
+          <span className="text-[#D97706] font-semibold">Practicing</span>, and{" "}
+          <span className="text-[#1E3A5F] font-semibold">Proficient</span>.
         </p>
       </div>
 
       {/* Graph Switcher Tabs */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 p-1.5 rounded-2xl glass-panel border-white/10 w-fit">
+      <div className="flex flex-wrap items-center gap-2 mb-8 p-1.5 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm w-fit">
         <button
           onClick={() => setActiveTab("proficiency")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
             activeTab === "proficiency"
-              ? "bg-[#F4B400] text-black shadow-lg font-semibold"
-              : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+              ? "bg-[#1E3A5F] text-white shadow-sm"
+              : "text-[#64748B] hover:text-[#242424] hover:bg-[#F8FAFC]"
           }`}
         >
           <Activity className="w-4 h-4" />
@@ -145,10 +144,10 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
 
         <button
           onClick={() => setActiveTab("radar")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
             activeTab === "radar"
-              ? "bg-[#F4B400] text-black shadow-lg font-semibold"
-              : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+              ? "bg-[#1E3A5F] text-white shadow-sm"
+              : "text-[#64748B] hover:text-[#242424] hover:bg-[#F8FAFC]"
           }`}
         >
           <Layers className="w-4 h-4" />
@@ -157,10 +156,10 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
 
         <button
           onClick={() => setActiveTab("distribution")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
             activeTab === "distribution"
-              ? "bg-[#F4B400] text-black shadow-lg font-semibold"
-              : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+              ? "bg-[#1E3A5F] text-white shadow-sm"
+              : "text-[#64748B] hover:text-[#242424] hover:bg-[#F8FAFC]"
           }`}
         >
           <PieChart className="w-4 h-4" />
@@ -169,10 +168,10 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
 
         <button
           onClick={() => setActiveTab("timeline")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
             activeTab === "timeline"
-              ? "bg-[#F4B400] text-black shadow-lg font-semibold"
-              : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+              ? "bg-[#1E3A5F] text-white shadow-sm"
+              : "text-[#64748B] hover:text-[#242424] hover:bg-[#F8FAFC]"
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -180,25 +179,25 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
         </button>
       </div>
 
-      {/* Main Glass Dashboard Surface */}
-      <div className="glass-panel p-6 sm:p-8 rounded-3xl border-white/10 shadow-2xl relative overflow-hidden">
+      {/* Main Card Surface */}
+      <div className="premium-card p-6 sm:p-8 rounded-3xl shadow-sm">
         {/* TAB 1: Horizontal Bar Chart */}
         {activeTab === "proficiency" && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
               <div>
-                <h3 className="text-lg font-bold text-white">Technological Competency & Learning Status</h3>
-                <p className="text-xs text-zinc-400 font-mono mt-0.5">Filter by category to explore verified competencies</p>
+                <h3 className="text-lg font-bold text-[#242424]">Technological Competency & Learning Status</h3>
+                <p className="text-xs text-[#64748B] mt-0.5">Filter by category to explore verified competencies</p>
               </div>
 
               {/* Category Filter Pills */}
               <div className="flex flex-wrap items-center gap-1.5">
                 <button
                   onClick={() => setSelectedCategory("All")}
-                  className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors ${
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
                     selectedCategory === "All"
-                      ? "bg-white/20 text-white font-semibold"
-                      : "bg-white/[0.04] text-zinc-400 hover:text-white"
+                      ? "bg-[#1E3A5F] text-white"
+                      : "bg-[#F1F5F9] text-[#64748B] hover:text-[#242424]"
                   }`}
                 >
                   All
@@ -207,10 +206,10 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                   <button
                     key={c.id}
                     onClick={() => setSelectedCategory(c.name)}
-                    className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors ${
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${
                       selectedCategory === c.name
-                        ? "bg-[#F4B400]/20 text-[#FFF4D6] border border-[#F4B400]/40 font-semibold"
-                        : "bg-white/[0.04] text-zinc-400 hover:text-white"
+                        ? "bg-[#1E3A5F] text-white"
+                        : "bg-[#F1F5F9] text-[#64748B] hover:text-[#242424]"
                     }`}
                   >
                     {c.name}
@@ -220,15 +219,15 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
             </div>
 
             {/* Status Legend */}
-            <div className="flex items-center gap-6 text-xs font-mono">
-              <span className="flex items-center gap-1.5 text-zinc-300">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#60A5FA]" /> Learning
+            <div className="flex items-center gap-6 text-xs font-medium">
+              <span className="flex items-center gap-1.5 text-[#64748B]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB]" /> Learning
               </span>
-              <span className="flex items-center gap-1.5 text-zinc-300">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#F4B400]" /> Practicing
+              <span className="flex items-center gap-1.5 text-[#64748B]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D97706]" /> Practicing
               </span>
-              <span className="flex items-center gap-1.5 text-zinc-300">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#34C759]" /> Proficient
+              <span className="flex items-center gap-1.5 text-[#64748B]">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#1E3A5F]" /> Proficient
               </span>
             </div>
 
@@ -238,35 +237,36 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                 <BarChart
                   data={barChartData}
                   layout="vertical"
-                  margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
+                  margin={{ top: 5, right: 30, left: 70, bottom: 5 }}
                 >
-                  <XAxis type="number" domain={[0, 100]} stroke="#71717A" fontSize={11} tickLine={false} />
+                  <XAxis type="number" domain={[0, 100]} stroke="#94A3B8" fontSize={11} tickLine={false} />
                   <YAxis
                     type="category"
                     dataKey="name"
-                    stroke="#D4D4D8"
+                    stroke="#475569"
                     fontSize={12}
                     tickLine={false}
-                    width={110}
+                    width={120}
                   />
                   <Tooltip
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
+                        const statusObj = STATUS_CONFIG[data.status] || STATUS_CONFIG.LEARNING;
                         return (
-                          <div className="glass-panel bg-[#080808]/95 p-3 rounded-xl border-white/20 text-xs font-mono shadow-2xl">
-                            <p className="text-white font-bold">{data.name}</p>
-                            <p className="text-zinc-400 mt-0.5">Category: {data.category}</p>
+                          <div className="bg-white p-3 rounded-xl border border-[#CBD5E1] text-xs shadow-md">
+                            <p className="text-[#242424] font-bold">{data.name}</p>
+                            <p className="text-[#64748B] mt-0.5">Category: {data.category}</p>
                             <p className="mt-1 flex items-center gap-1.5">
                               Status:{" "}
                               <span
-                                style={{ color: STATUS_COLORS[data.status] }}
+                                style={{ color: statusObj.color }}
                                 className="font-semibold uppercase"
                               >
                                 {data.status}
                               </span>
                             </p>
-                            <p className="text-[#FFF4D6] mt-0.5">Score: {data.score} / 100</p>
+                            <p className="text-[#1E3A5F] font-bold mt-0.5">Score: {data.score} / 100</p>
                           </div>
                         );
                       }
@@ -276,11 +276,14 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                   <Bar
                     dataKey="score"
                     radius={[0, 6, 6, 0]}
-                    animationDuration={800}
-                    fill="#F4B400"
+                    animationDuration={600}
+                    fill="#1E3A5F"
                   >
                     {barChartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={STATUS_COLORS[entry.status] || "#F4B400"} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={STATUS_CONFIG[entry.status]?.color || "#1E3A5F"}
+                      />
                     ))}
                   </Bar>
                 </BarChart>
@@ -293,8 +296,8 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
         {activeTab === "radar" && (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-bold text-white">Full-Stack Competency Area Radar</h3>
-              <p className="text-xs text-zinc-400 font-mono mt-0.5">
+              <h3 className="text-lg font-bold text-[#242424]">Full-Stack Competency Area Radar</h3>
+              <p className="text-xs text-[#64748B] mt-0.5">
                 Relative competency balance computed across all technical domains
               </p>
             </div>
@@ -302,18 +305,18 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
             <div className="h-[440px] w-full flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarChartData}>
-                  <PolarGrid stroke="#27272A" />
-                  <PolarAngleAxis dataKey="subject" stroke="#A1A1AA" fontSize={12} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#52525B" fontSize={10} />
+                  <PolarGrid stroke="#E2E8F0" />
+                  <PolarAngleAxis dataKey="subject" stroke="#475569" fontSize={12} />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} stroke="#94A3B8" fontSize={10} />
                   <Tooltip
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const data = payload[0].payload;
                         return (
-                          <div className="glass-panel bg-[#080808]/95 p-3 rounded-xl border-white/20 text-xs font-mono shadow-2xl">
-                            <p className="text-[#F4B400] font-bold">{data.subject}</p>
-                            <p className="text-zinc-300 mt-1">Average Level: {data.A}%</p>
-                            <p className="text-zinc-400">Total Skills: {data.skillCount}</p>
+                          <div className="bg-white p-3 rounded-xl border border-[#CBD5E1] text-xs shadow-md">
+                            <p className="text-[#1E3A5F] font-bold">{data.subject}</p>
+                            <p className="text-[#242424] mt-1 font-semibold">Average Level: {data.A}%</p>
+                            <p className="text-[#64748B]">Total Skills: {data.skillCount}</p>
                           </div>
                         );
                       }
@@ -323,9 +326,9 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                   <Radar
                     name="Skills"
                     dataKey="A"
-                    stroke="#F4B400"
-                    fill="#F4B400"
-                    fillOpacity={0.25}
+                    stroke="#1E3A5F"
+                    fill="#1E3A5F"
+                    fillOpacity={0.2}
                   />
                 </RadarChart>
               </ResponsiveContainer>
@@ -337,8 +340,8 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
         {activeTab === "distribution" && (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-bold text-white">Skill Distribution by Category</h3>
-              <p className="text-xs text-zinc-400 font-mono mt-0.5">
+              <h3 className="text-lg font-bold text-[#242424]">Skill Distribution by Category</h3>
+              <p className="text-xs text-[#64748B] mt-0.5">
                 Number of documented skills across technical domains
               </p>
             </div>
@@ -365,9 +368,9 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                         if (active && payload && payload.length) {
                           const data = payload[0].payload;
                           return (
-                            <div className="glass-panel bg-[#080808]/95 p-3 rounded-xl border-white/20 text-xs font-mono shadow-2xl">
-                              <p className="text-white font-bold">{data.name}</p>
-                              <p className="text-[#F4B400] mt-1">{data.value} Recorded Skills</p>
+                            <div className="bg-white p-3 rounded-xl border border-[#CBD5E1] text-xs shadow-md">
+                              <p className="text-[#242424] font-bold">{data.name}</p>
+                              <p className="text-[#1E3A5F] font-bold mt-1">{data.value} Recorded Skills</p>
                             </div>
                           );
                         }
@@ -383,16 +386,16 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                 {distributionData.map((d, idx) => (
                   <div
                     key={d.name}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.03] border border-white/5"
+                    className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]"
                   >
                     <div className="flex items-center gap-2.5">
                       <span
                         className="w-3 h-3 rounded-full flex-shrink-0"
                         style={{ backgroundColor: PIE_COLORS[idx % PIE_COLORS.length] }}
                       />
-                      <span className="text-sm font-medium text-zinc-200">{d.name}</span>
+                      <span className="text-sm font-semibold text-[#242424]">{d.name}</span>
                     </div>
-                    <span className="text-xs font-mono text-[#F4B400] font-bold">
+                    <span className="text-xs font-bold text-[#1E3A5F]">
                       {d.value} skills
                     </span>
                   </div>
@@ -406,13 +409,13 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
         {activeTab === "timeline" && (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-bold text-white">Documented Learning Milestones</h3>
-              <p className="text-xs text-zinc-400 font-mono mt-0.5">
+              <h3 className="text-lg font-bold text-[#242424]">Documented Learning Milestones</h3>
+              <p className="text-xs text-[#64748B] mt-0.5">
                 Verified progression points added and managed via admin
               </p>
             </div>
 
-            <div className="relative pl-6 sm:pl-8 border-l border-white/10 space-y-8 my-6">
+            <div className="relative pl-6 sm:pl-8 border-l border-[#CBD5E1] space-y-8 my-6">
               {milestones.map((ms, index) => {
                 const dateStr = new Date(ms.milestoneDate).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -421,19 +424,19 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
                 return (
                   <div key={ms.id || index} className="relative group">
                     {/* Node Dot */}
-                    <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-[#080808] border-2 border-[#F4B400] group-hover:scale-125 transition-transform" />
+                    <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-[#1E3A5F] group-hover:scale-125 transition-transform" />
 
-                    <div className="glass-panel p-5 rounded-2xl border-white/10 group-hover:border-[#F4B400]/40 transition-colors">
+                    <div className="p-5 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] group-hover:border-[#CBD5E1] transition-colors">
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                        <span className="text-xs font-mono text-[#F4B400] font-semibold">{dateStr}</span>
+                        <span className="text-xs font-bold text-[#1E3A5F]">{dateStr}</span>
                         {ms.category && (
-                          <span className="px-2.5 py-0.5 rounded-md bg-white/[0.05] border border-white/10 text-[11px] font-mono text-zinc-400">
+                          <span className="px-2.5 py-0.5 rounded-md bg-white border border-[#CBD5E1] text-[11px] font-semibold text-[#64748B]">
                             {ms.category}
                           </span>
                         )}
                       </div>
-                      <h4 className="text-base font-bold text-white mb-1.5">{ms.title}</h4>
-                      <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
+                      <h4 className="text-base font-bold text-[#242424] mb-1.5">{ms.title}</h4>
+                      <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
                         {ms.description}
                       </p>
                     </div>
@@ -446,36 +449,39 @@ export const SkillsDashboard: React.FC<SkillsDashboardProps> = ({ categories, mi
       </div>
 
       {/* Categorized Skills Grid Cards */}
-      <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((category) => (
           <div
             key={category.id}
-            className="glass-panel p-6 rounded-2xl border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+            className="premium-card p-6 rounded-2xl flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-base font-bold text-white tracking-wide">{category.name}</h4>
-                <span className="text-[11px] font-mono text-[#F4B400] bg-white/[0.04] px-2 py-0.5 rounded-md">
+              <div className="flex items-center justify-between mb-2.5">
+                <h4 className="text-base font-bold text-[#242424] tracking-tight">{category.name}</h4>
+                <span className="text-[11px] font-semibold text-[#1E3A5F] bg-[#EEF4FA] px-2.5 py-0.5 rounded-md border border-[#CBD5E1]/60">
                   {category.skills.length} techs
                 </span>
               </div>
               {category.description && (
-                <p className="text-xs text-zinc-400 mb-4">{category.description}</p>
+                <p className="text-xs text-[#64748B] mb-4">{category.description}</p>
               )}
 
               <div className="flex flex-wrap gap-2 pt-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill.id}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono bg-white/[0.04] border border-white/10 text-zinc-200"
-                  >
+                {category.skills.map((skill) => {
+                  const statusObj = STATUS_CONFIG[skill.status] || STATUS_CONFIG.LEARNING;
+                  return (
                     <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: STATUS_COLORS[skill.status] }}
-                    />
-                    <span>{skill.name}</span>
-                  </span>
-                ))}
+                      key={skill.id}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#F8FAFC] border border-[#E2E8F0] text-[#242424]"
+                    >
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: statusObj.color }}
+                      />
+                      <span>{skill.name}</span>
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
